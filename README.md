@@ -100,11 +100,17 @@ playwright install
 # Demo AI healing capabilities
 python3 demo_healing.py
 
-# Run test suite with AI recovery
-python3 -m pytest tests/ -v -s
+# Run complete system with UI and monitoring
+./run_complete_system.sh
 
-# Launch AI Dashboard
-streamlit run Dashboard/executive_dashboard.py
+# Access UI dashboards
+# Complete Repository: http://localhost:8503
+# Executive Dashboard:  http://localhost:8501
+# Standalone Dashboard: http://localhost:8502
+
+# Access Grafana monitoring
+# URL: http://localhost:3000
+# Username: admin, Password: admin123
 ```
 
 ---
@@ -116,39 +122,91 @@ AI-Augmented-QA-Engine/
 ├── src/                    # Core AI & Automation Logic
 │   ├── model/                 # AI Engine (Computer Vision, ML)
 │   │   ├── healing.py        # OpenCV visual recovery system
-│   │   ├── predictor.py      # Predictive defect analytics
-│   │   └── vision_healer.py  # Advanced vision healing
-│   ├── pages/                # Page Object Architecture
-│   │   ├── base_page.py      # AI-augmented base class
-│   │   ├── login_page.py     # Advanced login page object
-│   │   └── __init__.py
-│   └── utils/                 # Utility modules
-│       ├── metrics_collector.py # InfluxDB integration
-│       └── __init__.py
-├── tests/                  # Test Suites (E2E, Integration)
-│   ├── test_login.py         # AI healing demonstration
-│   ├── test_advanced_login.py # Comprehensive test scenarios
-│   ├── test_performance.py   # Performance benchmarks
-│   ├── test_integration.py   # Integration testing
-│   └── __init__.py
-├── Dashboard/              # AI Analytics & Control
-│   ├── app.py                # Streamlit real-time dashboard
-│   └── executive_dashboard.py # Executive-level dashboard
-├── .github/workflows/     # CI/CD Pipeline
-│   └── qualityops.yml      # Enterprise-grade automation
-├── config/                 # Configuration Management
-│   ├── settings.yaml        # AI/ML parameters
-│   └── login_test_config.yaml # Test configuration
-├── data/                   # Historical Test Data
-│   └── login_test_data.csv  # Test data for data-driven testing
-├── grafana/               # Grafana Dashboard Configuration
+│   │   ├── advanced_vision_healer.py  # Advanced AI healing
+│   │   ├── risk_predictor.py  # Predictive defect analytics
+│   │   └── predictor.py      # ML prediction models
+│   ├── pages/                 # Page Object Model with AI
+│   │   ├── base_page.py      # Smart page objects
+│   │   └── login_page.py     # AI-enhanced login flows
+│   └── utils/                 # Utilities and helpers
+│       └── metrics_collector.py  # Performance metrics
+├── Dashboard/               # Streamlit UI Dashboards
+│   ├── app.py               # Main AI dashboard
+│   └── executive_dashboard.py  # Executive analytics
+├── tests/                   # AI-Powered Test Suites
+│   ├── test_login.py        # AI healing test cases
+│   ├── test_advanced_login.py  # Advanced AI tests
+│   ├── test_integration.py  # System integration tests
+│   └── test_performance.py  # Performance benchmarks
+├── examples/                # Real-World Examples
+│   └── test_ecommerce.py    # E-commerce AI testing
+├── grafana/                 # Grafana Dashboard Configuration
 │   ├── provisioning/        # Auto-provisioning
+│   │   ├── datasources/    # InfluxDB datasource
+│   │   └── dashboards/     # Dashboard definitions
+│   └── provisioning/dashboards/dashboard.yml
+├── docs/                    # Technical Documentation
+├── assets/                  # Visual Templates for AI
+├── run_complete_system.sh  # One-command system launcher
+└── docker-compose.yml       # Infrastructure as Code
+```
+
+---
+
+## Complete System Monitoring
+
+### One-Command System Launch
 │   │   ├── datasources/    # InfluxDB datasource
 │   │   └── dashboards/     # Dashboard definitions
 │   └── provisioning/dashboards/dashboard.yml
 ├── docs/                  # Technical Documentation
 ├── assets/                # Visual Templates for AI
 └── docker-compose.yml     # Infrastructure as Code
+```
+
+---
+
+## Complete System Monitoring
+
+### One-Command System Launch
+```bash
+# Start everything: UI dashboards, Grafana, InfluxDB, monitoring
+./run_complete_system.sh
+```
+
+### System Components
+- **3 UI Dashboards**: Repository view, Executive analytics, Standalone interface
+- **Grafana Monitoring**: Real-time metrics and performance dashboards
+- **InfluxDB Database**: Time-series data storage for AI operations
+- **Live Logs**: Real-time system monitoring and debugging
+
+### Access Points
+```bash
+# UI Dashboards
+http://localhost:8503  # Complete Repository Dashboard
+http://localhost:8501  # Executive Dashboard  
+http://localhost:8502  # Standalone Dashboard
+
+# Grafana Monitoring
+http://localhost:3000  # Username: admin, Password: admin123
+
+# InfluxDB Database
+http://localhost:8086  # Username: admin, Password: password123
+```
+
+### Monitoring Commands
+```bash
+# View Grafana logs
+docker-compose logs -f grafana
+
+# View InfluxDB logs  
+docker-compose logs -f influxdb
+
+# Check system status
+docker-compose ps
+
+# Stop all services
+docker-compose down
 ```
 
 ---
