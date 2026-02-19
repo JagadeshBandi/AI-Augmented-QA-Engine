@@ -1,0 +1,35 @@
+# Configuration for AI-Augmented QA Engine
+
+[project]
+name = "ARES: AI-Augmented QA Engine"
+version = "1.0.0"
+description = "Next-Gen SDET Framework featuring Predictive Defect Analytics & Computer Vision"
+
+[ai_config]
+# Computer Vision Healing
+opencv_threshold = 0.8
+template_match_method = "TM_CCOEFF_NORMED"
+visual_recovery_timeout = 30
+
+# Predictive Analytics
+model_type = "RandomForest"
+failure_threshold = 0.7
+historical_data_window = 30
+
+[automation]
+# Playwright Settings
+browser_timeout = 10000
+retry_attempts = 3
+headless_mode = false
+screenshot_on_failure = true
+
+# Test Execution
+parallel_workers = 4
+test_batch_size = 10
+report_format = "allure"
+
+[dashboard]
+# Streamlit Configuration
+port = 8501
+refresh_interval = 5
+max_history_points = 1000
