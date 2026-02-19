@@ -104,7 +104,7 @@ python3 demo_healing.py
 python3 -m pytest tests/ -v -s
 
 # Launch AI Dashboard
-streamlit run Dashboard/app.py
+streamlit run Dashboard/executive_dashboard.py
 ```
 
 ---
@@ -116,24 +116,39 @@ AI-Augmented-QA-Engine/
 ├── src/                    # Core AI & Automation Logic
 │   ├── model/                 # AI Engine (Computer Vision, ML)
 │   │   ├── healing.py        # OpenCV visual recovery system
-│   │   └── predictor.py      # Predictive defect analytics
-│   └── pages/                # Page Object Architecture
-│       ├── base_page.py      # AI-augmented base class
+│   │   ├── predictor.py      # Predictive defect analytics
+│   │   └── vision_healer.py  # Advanced vision healing
+│   ├── pages/                # Page Object Architecture
+│   │   ├── base_page.py      # AI-augmented base class
+│   │   ├── login_page.py     # Advanced login page object
+│   │   └── __init__.py
+│   └── utils/                 # Utility modules
+│       ├── metrics_collector.py # InfluxDB integration
 │       └── __init__.py
 ├── tests/                  # Test Suites (E2E, Integration)
 │   ├── test_login.py         # AI healing demonstration
+│   ├── test_advanced_login.py # Comprehensive test scenarios
+│   ├── test_performance.py   # Performance benchmarks
+│   ├── test_integration.py   # Integration testing
 │   └── __init__.py
 ├── Dashboard/              # AI Analytics & Control
-│   └── app.py                # Streamlit real-time dashboard
-├── examples/               # Real-world Implementation
-│   └── test_ecommerce.py    # Production scenarios
+│   ├── app.py                # Streamlit real-time dashboard
+│   └── executive_dashboard.py # Executive-level dashboard
+├── .github/workflows/     # CI/CD Pipeline
+│   └── qualityops.yml      # Enterprise-grade automation
 ├── config/                 # Configuration Management
-│   └── settings.yaml        # AI/ML parameters
-├── scripts/               # Utility Scripts
-│   └── setup.py             # Automated environment setup
+│   ├── settings.yaml        # AI/ML parameters
+│   └── login_test_config.yaml # Test configuration
+├── data/                   # Historical Test Data
+│   └── login_test_data.csv  # Test data for data-driven testing
+├── grafana/               # Grafana Dashboard Configuration
+│   ├── provisioning/        # Auto-provisioning
+│   │   ├── datasources/    # InfluxDB datasource
+│   │   └── dashboards/     # Dashboard definitions
+│   └── provisioning/dashboards/dashboard.yml
 ├── docs/                  # Technical Documentation
 ├── assets/                # Visual Templates for AI
-└── data/                  # Historical Test Data
+└── docker-compose.yml     # Infrastructure as Code
 ```
 
 ---
@@ -183,19 +198,70 @@ features = [
 
 ---
 
-## AI Dashboard Features
+## Enterprise Observability (Grafana)
 
-### Real-Time Analytics
-- **System Health Score**: Overall framework reliability
-- **AI Healing Metrics**: Visual recovery success rates
-- **Defect Heatmap**: Predictive risk visualization
-- **Test Execution Insights**: Performance analytics
+ARES integrates with **InfluxDB** and **Grafana** to provide a real-time Quality Operations (QualityOps) platform that elevates test automation from a simple test suite to enterprise-grade observability.
 
-### AI Control Center
-- **Environment Selection**: Staging/Production/UAT
-- **Test Suite Orchestration**: One-click execution
-- **Healing Configuration**: AI sensitivity tuning
-- **Model Retraining**: Continuous improvement
+### Architecture Overview
+```mermaid
+graph LR
+    A[ARES Test Engine] -->|Metrics| B[InfluxDB Time-Series DB]
+    B -->|Queries| C[Grafana Dashboard]
+    C -->|Visualization| D[QualityOps Insights]
+```
+
+### Key Features
+- **Strategic Insights**: Track ROI by monitoring automated vs. manual effort
+- **Predictive Trends**: Visualizes the "Hot Zone" defect prediction model  
+- **Live Monitoring**: View containerized test execution performance in real-time
+- **Flakiness Index**: Heat map showing intermittently failing tests
+- **Execution Velocity**: Line graph comparing test duration vs. code changes
+
+### Quick Start with Observability
+```bash
+# Start the TIG Stack (Telegraf, InfluxDB, Grafana)
+docker-compose up -d
+
+# Run tests with automatic metrics collection
+ARES_METRICS_ENABLED=true python -m pytest tests/ -v
+
+# Access Grafana Dashboard
+# URL: http://localhost:3000
+# Username: admin
+# Password: admin123
+```
+
+### High-End Dashboard Panels
+- **Flakiness Index**: Heat map showing test reliability patterns
+- **Predictive Risk Meter**: Gauge showing regression probability based on AI model output
+- **Execution Velocity**: Line graph comparing test duration vs. code changes
+
+---
+
+## Advanced Features
+
+### AI Brain Predictive Layer
+The AI Brain uses machine learning to predict test failures based on:
+- **Git Analysis**: Automatic feature extraction from code commits
+- **Risk Assessment**: Real-time test failure probability calculation
+- **Continuous Learning**: Model retraining with new test results
+- **Multi-factor Analysis**: Files changed, authors, time patterns, complexity metrics
+
+### Computer Vision Self-Healing
+Advanced vision system with multiple recovery strategies:
+- **Template Matching**: 6 different OpenCV algorithms
+- **Edge Detection**: Canny edge detection for element finding
+- **Feature Matching**: ORB feature matching for complex elements
+- **Fallback Strategies**: Traditional selectors when vision fails
+- **Performance Tracking**: Confidence scores and healing statistics
+
+### QualityOps CI/CD Pipeline
+Enterprise-grade automation with GitHub Actions:
+- **Multi-stage Testing**: Smoke, regression, integration, accessibility, security
+- **AI-Driven Testing**: Risk-based test prioritization
+- **Infrastructure Setup**: Automated TIG stack deployment
+- **Executive Reporting**: Automated quality score generation
+- **Multi-channel Notifications**: Slack, Teams, Email alerts
 
 ---
 
@@ -203,10 +269,10 @@ features = [
 
 ### Basic AI Healing
 ```python
-from src.pages.base_page import BasePage
+from src.pages.login_page import LoginPage
 
 def test_login_with_ai_healing():
-    base = BasePage(page)
+    base = LoginPage(page)
     # If selector fails, AI automatically recovers visually
     base.smart_click("#broken-login-id", "login_button")
 ```
@@ -300,55 +366,6 @@ MIT License - See [LICENSE](LICENSE) for details.
 ---
 
 > **Note**: This project demonstrates the practical application of advanced AI technology in solving real-world software quality challenges. It's designed to be both **technically robust** and **commercially viable**.
-
----
-
-## Enterprise Observability (Grafana)
-
-ARES integrates with **InfluxDB** and **Grafana** to provide a real-time Quality Operations (QualityOps) platform that elevates test automation from a simple test suite to enterprise-grade observability.
-
-### Architecture Overview
-```mermaid
-graph LR
-    A[ARES Test Engine] -->|Metrics| B[InfluxDB Time-Series DB]
-    B -->|Queries| C[Grafana Dashboard]
-    C -->|Visualization| D[QualityOps Insights]
-```
-
-### Key Features
-- **Strategic Insights**: Track ROI by monitoring automated vs. manual effort
-- **Predictive Trends**: Visualizes the "Hot Zone" defect prediction model  
-- **Live Monitoring**: View containerized test execution performance in real-time
-- **Flakiness Index**: Heat map showing intermittently failing tests
-- **Execution Velocity**: Line graph comparing test duration vs. code changes
-
-### Quick Start with Observability
-```bash
-# Start the TIG Stack (Telegraf, InfluxDB, Grafana)
-docker-compose up -d
-
-# Run tests with automatic metrics collection
-ARES_METRICS_ENABLED=true python -m pytest tests/ -v
-
-# Access Grafana Dashboard
-# URL: http://localhost:3000
-# Username: admin
-# Password: admin123
-```
-
-### High-End Dashboard Panels
-- **Flakiness Index**: Heat map showing test reliability patterns
-- **Predictive Risk Meter**: Gauge showing regression probability based on AI model output
-- **Execution Velocity**: Test duration trends over time
-- **Quality Gate Health**: Overall system reliability score
-- **Test Coverage Analytics**: Comprehensive coverage metrics
-
-### Data Points Collected
-- Test execution duration and status
-- AI healing success rates
-- Flakiness scores and patterns
-- Session-level statistics
-- Custom test tags and parameters
 
 ---
 

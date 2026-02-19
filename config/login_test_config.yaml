@@ -1,0 +1,234 @@
+# Advanced Login Test Configuration
+# Enterprise-grade settings for comprehensive login testing
+
+environments:
+  development:
+    base_url: "https://dev.example.com"
+    login_url: "https://dev.example.com/login"
+    timeout: 30000
+    headless: true
+    
+  staging:
+    base_url: "https://staging.example.com"
+    login_url: "https://staging.example.com/login"
+    timeout: 45000
+    headless: false
+    
+  production:
+    base_url: "https://app.example.com"
+    login_url: "https://app.example.com/login"
+    timeout: 60000
+    headless: false
+
+test_credentials:
+  valid_users:
+    - username: "admin@example.com"
+      password: "AdminPass123!"
+      role: "admin"
+      expected_success: true
+      mfa_required: false
+      
+    - username: "user@example.com"
+      password: "UserPass123!"
+      role: "user"
+      expected_success: true
+      mfa_required: false
+      
+    - username: "mfa_user@example.com"
+      password: "MfaPass123!"
+      role: "user"
+      expected_success: true
+      mfa_required: true
+      mfa_code: "123456"
+  
+  invalid_users:
+    - username: "wrong@example.com"
+      password: "WrongPass123!"
+      expected_success: false
+      expected_error: "Invalid credentials"
+      
+    - username: "test@example.com"
+      password: "WrongPassword"
+      expected_success: false
+      expected_error: "Invalid credentials"
+      
+    - username: ""
+      password: ""
+      expected_success: false
+      expected_error: "Required fields"
+      
+    - username: "test@example.com"
+      password: "123"
+      expected_success: false
+      expected_error: "Password too weak"
+
+security_test_cases:
+  sql_injection:
+    - username: "admin' OR '1'='1"
+      password: "password"
+      expected_risk: "SQL Injection"
+      
+    - username: "admin'; DROP TABLE users; --"
+      password: "password"
+      expected_risk: "SQL Injection"
+      
+    - username: "admin\" OR \"1\"=\"1"
+      password: "password"
+      expected_risk: "SQL Injection"
+  
+  xss_attempts:
+    - username: "<script>alert('xss')</script>"
+      password: "password"
+      expected_risk: "XSS"
+      
+    - username: "javascript:alert('xss')"
+      password: "password"
+      expected_risk: "XSS"
+      
+    - username: "<img src=x onerror=alert('xss')>"
+      password: "password"
+      expected_risk: "XSS"
+  
+  brute_force:
+    - username: "admin"
+      password: "a" * 1000
+      expected_risk: "Buffer Overflow"
+      
+    - username: "admin"
+      password: null
+      expected_risk: "Null Input"
+
+performance_thresholds:
+  page_load_time: 5.0  # seconds
+  login_duration: 3.0  # seconds
+  logout_duration: 2.0  # seconds
+  total_session_time: 15.0  # seconds
+  
+ai_healing:
+  enabled: true
+  threshold: 0.8
+  template_paths:
+    username_field: "assets/templates/username_field.png"
+    password_field: "assets/templates/password_field.png"
+    login_button: "assets/templates/login_button.png"
+    remember_me: "assets/templates/remember_me.png"
+    forgot_password: "assets/templates/forgot_password.png"
+  
+  fallback_strategies:
+    - "selector_variations"
+    - "text_based_search"
+    - "coordinate_mapping"
+    - "dom_traversal"
+
+accessibility_requirements:
+  required_labels: true
+  aria_labels: true
+  keyboard_navigation: true
+  color_contrast: true
+  screen_reader_support: true
+  
+viewports:
+  desktop:
+    width: 1920
+    height: 1080
+    name: "Desktop"
+    
+  tablet:
+    width: 768
+    height: 1024
+    name: "Tablet"
+    
+  mobile:
+    width: 375
+    height: 667
+    name: "Mobile"
+    
+  large_desktop:
+    width: 2560
+    height: 1440
+    name: "Large Desktop"
+
+browser_configurations:
+  chromium:
+    args:
+      - "--disable-web-security"
+      - "--disable-features=VizDisplayCompositor"
+      - "--no-sandbox"
+      - "--disable-dev-shm-usage"
+    
+  firefox:
+    args:
+      - "--width=1920"
+      - "--height=1080"
+      
+  webkit:
+    args:
+      - "--width=1920"
+      - "--height=1080"
+
+test_tags:
+  smoke: ["critical", "fast"]
+  regression: ["medium", "comprehensive"]
+  security: ["security", "penetration"]
+  performance: ["performance", "benchmark"]
+  accessibility: ["accessibility", "a11y"]
+  ai_healing: ["ai", "healing", "recovery"]
+  mfa: ["mfa", "2fa", "authentication"]
+  session: ["session", "logout"]
+  stress: ["stress", "load"]
+  ui: ["ui", "responsive"]
+  integration: ["integration", "database"]
+
+reporting:
+  generate_screenshots: true
+  capture_network_logs: true
+  capture_console_logs: true
+  performance_metrics: true
+  accessibility_audit: true
+  security_scan: true
+  
+error_handling:
+  retry_attempts: 3
+  retry_delay: 1.0  # seconds
+  screenshot_on_error: true
+  full_page_screenshot: true
+  network_dump_on_error: true
+  
+data_driven:
+  csv_files:
+    - "data/users.csv"
+    - "data/security_tests.csv"
+    - "data/performance_data.csv"
+  
+  excel_files:
+    - "data/test_scenarios.xlsx"
+    
+  json_files:
+    - "data/config.json"
+    - "data/credentials.json"
+
+monitoring:
+  metrics_collection: true
+  real_time_dashboard: true
+  alert_thresholds:
+    failure_rate: 10.0  # percentage
+    response_time: 5.0  # seconds
+    error_count: 5
+    
+cleanup:
+  clear_cookies: true
+  clear_storage: true
+  close_browser: true
+  delete_temp_files: true
+  
+parallel_execution:
+  max_workers: 4
+  shard_tests: true
+  isolate_sessions: true
+  
+debugging:
+  devtools: true
+  slow_mo: 100  # milliseconds
+  headless: false
+  trace: true
+  video: true

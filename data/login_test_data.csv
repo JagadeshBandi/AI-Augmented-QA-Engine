@@ -1,0 +1,12 @@
+username,password,role,expected_success,mfa_required,expected_error,security_risk
+admin@example.com,AdminPass123!,admin,true,false,,None
+user@example.com,UserPass123!,user,true,false,,None
+mfa_user@example.com,MfaPass123!,user,true,true,123456,None
+wrong@example.com,WrongPass123!,user,false,false,Invalid credentials,None
+test@example.com,WrongPassword,user,false,false,Invalid credentials,None
+,empty_user,user,false,false,Required fields,Empty username
+test@example.com,empty_pass,user,false,false,Required fields,Empty password
+test@example.com,123,user,false,false,Password too weak,Weak password
+admin' OR '1'='1,password,user,false,false,SQL Injection detected,SQL Injection
+<script>alert('xss')</script>,password,user,false,false,XSS detected,XSS
+test@example.com,a*1000,user,false,false,Invalid input,Buffer Overflow

@@ -4,7 +4,7 @@
 
 ### VisualHealer Class
 
-**Purpose**: Computer Vision-based element recovery using OpenCV template matching.
+**Purpose**: Computer vision-based element recovery using OpenCV template matching.
 
 #### Methods
 

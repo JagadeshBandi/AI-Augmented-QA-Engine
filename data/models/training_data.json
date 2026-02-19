@@ -1,0 +1,82 @@
+[
+  {
+    "test_name": "test_login_functionality",
+    "files_changed": [
+      "src/auth/login.py",
+      "src/auth/user.py"
+    ],
+    "authors": [
+      "developer1"
+    ],
+    "commit_count": 3,
+    "lines_added": 45,
+    "lines_removed": 12,
+    "time_of_day": 14,
+    "day_of_week": 2,
+    "complex_changes": true,
+    "test_files_touched": false,
+    "config_files_touched": false,
+    "failed": true,
+    "failure_reason": "Authentication logic changed"
+  },
+  {
+    "test_name": "test_payment_processing",
+    "files_changed": [
+      "src/payment/processor.py"
+    ],
+    "authors": [
+      "developer2"
+    ],
+    "commit_count": 1,
+    "lines_added": 15,
+    "lines_removed": 5,
+    "time_of_day": 10,
+    "day_of_week": 3,
+    "complex_changes": false,
+    "test_files_touched": false,
+    "config_files_touched": false,
+    "failed": false,
+    "failure_reason": null
+  },
+  {
+    "test_name": "test_user_registration",
+    "files_changed": [
+      "src/auth/user.py",
+      "src/database/models.py",
+      "config/database.yaml"
+    ],
+    "authors": [
+      "developer1",
+      "developer3"
+    ],
+    "commit_count": 5,
+    "lines_added": 120,
+    "lines_removed": 45,
+    "time_of_day": 16,
+    "day_of_week": 4,
+    "complex_changes": true,
+    "test_files_touched": true,
+    "config_files_touched": true,
+    "failed": true,
+    "failure_reason": "Database schema changes"
+  },
+  {
+    "test_name": "test_search_functionality",
+    "files_changed": [
+      "src/search/index.py"
+    ],
+    "authors": [
+      "developer4"
+    ],
+    "commit_count": 2,
+    "lines_added": 25,
+    "lines_removed": 8,
+    "time_of_day": 11,
+    "day_of_week": 1,
+    "complex_changes": false,
+    "test_files_touched": false,
+    "config_files_touched": false,
+    "failed": false,
+    "failure_reason": null
+  }
+]
