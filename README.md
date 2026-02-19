@@ -303,6 +303,55 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ---
 
+## Enterprise Observability (Grafana)
+
+ARES integrates with **InfluxDB** and **Grafana** to provide a real-time Quality Operations (QualityOps) platform that elevates test automation from a simple test suite to enterprise-grade observability.
+
+### Architecture Overview
+```mermaid
+graph LR
+    A[ARES Test Engine] -->|Metrics| B[InfluxDB Time-Series DB]
+    B -->|Queries| C[Grafana Dashboard]
+    C -->|Visualization| D[QualityOps Insights]
+```
+
+### Key Features
+- **Strategic Insights**: Track ROI by monitoring automated vs. manual effort
+- **Predictive Trends**: Visualizes the "Hot Zone" defect prediction model  
+- **Live Monitoring**: View containerized test execution performance in real-time
+- **Flakiness Index**: Heat map showing intermittently failing tests
+- **Execution Velocity**: Line graph comparing test duration vs. code changes
+
+### Quick Start with Observability
+```bash
+# Start the TIG Stack (Telegraf, InfluxDB, Grafana)
+docker-compose up -d
+
+# Run tests with automatic metrics collection
+ARES_METRICS_ENABLED=true python -m pytest tests/ -v
+
+# Access Grafana Dashboard
+# URL: http://localhost:3000
+# Username: admin
+# Password: admin123
+```
+
+### High-End Dashboard Panels
+- **Flakiness Index**: Heat map showing test reliability patterns
+- **Predictive Risk Meter**: Gauge showing regression probability based on AI model output
+- **Execution Velocity**: Test duration trends over time
+- **Quality Gate Health**: Overall system reliability score
+- **Test Coverage Analytics**: Comprehensive coverage metrics
+
+### Data Points Collected
+- Test execution duration and status
+- AI healing success rates
+- Flakiness scores and patterns
+- Session-level statistics
+- Custom test tags and parameters
+
+---
+
 ## What's Next?
 
 ### Roadmap v2.0

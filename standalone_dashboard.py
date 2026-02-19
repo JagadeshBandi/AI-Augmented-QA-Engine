@@ -118,21 +118,21 @@ def main():
 
     with col1:
         st.markdown("### Core AI")
-        st.info("✅ OpenCV: Active")
-        st.info("✅ Template Matching: Ready")
-        st.info("✅ Confidence: 0.8")
+        st.info("OpenCV: Active")
+        st.info("Template Matching: Ready")
+        st.info("Confidence: 0.8")
 
     with col2:
         st.markdown("### Healing System")
-        st.success("✅ VisualHealer: Operational")
-        st.success("✅ Coordinate Mapping: Working")
-        st.success("✅ Pixel Accuracy: 100%")
+        st.success("VisualHealer: Operational")
+        st.success("Coordinate Mapping: Working")
+        st.success("Pixel Accuracy: 100%")
 
     with col3:
         st.markdown("### Reliability")
-        st.warning("✅ Self-Healing: Enabled")
-        st.warning("✅ Fallback Mode: Active")
-        st.warning("✅ Recovery Speed: <200ms")
+        st.warning("Self-Healing: Enabled")
+        st.warning("Fallback Mode: Active")
+        st.warning("Recovery Speed: <200ms")
 
     # Performance Metrics Table
     st.markdown("---")
